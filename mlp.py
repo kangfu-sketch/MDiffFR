@@ -34,7 +34,7 @@ class Client(torch.nn.Module):
         pass
 
 class MLPEngine(Engine):
-    """Engine for training & evaluating GMF model"""
+    """Engine for training & evaluating model"""
     def __init__(self, config):
         super(MLPEngine, self).__init__(config)
         self.client_model = Client(config)
