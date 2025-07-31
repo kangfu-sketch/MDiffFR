@@ -11,11 +11,6 @@ from utils import *
 from torch.distributions.laplace import Laplace
 
 class Engine(object):
-    """Meta Engine for training & evaluating NCF model
-
-    Note: Subclass should implement self.client_model and self.server_model!
-    """
-
     def __init__(self, config):
         self.config = config  # model configuration
 
@@ -25,8 +20,7 @@ class Engine(object):
         self.client_model_params = {}
         self.client_crit = torch.nn.BCELoss()
         self.server_crit = torch.nn.MSELoss()
-
-        # self.device = torch.device(f"cuda:{str(config['device_id'])}" if config['use_cuda'] else "cpu")
+        
         self.device = torch.device("cuda:0" if config['use_cuda'] else "cpu")
     def instance_user_train_loader(self, user_train_data):
         """instance a user's train loader."""
@@ -188,13 +182,6 @@ class Engine(object):
 
     def fed_evaluate(self, evaluate_data, item_content, item_ids_map, round_id, t):
         """evaluate all client models' performance using testing data."""
-        """input: 
-        evaluate_data: (uid, iid) dataframe.
-        item_content: evaluated item raw feature.
-        item_ids_map: {ori_id: reindex_id} dict.
-           output:
-        recall, precision, ndcg
-        """
         item_content = torch.tensor(item_content)
         if self.config['use_cuda'] is True:
             item_content = item_content.cuda()
