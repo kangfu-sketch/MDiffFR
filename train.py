@@ -83,10 +83,9 @@ else:
     config['client_model_layers'] = [config['latent_dim']].extend(int(config['client_model_layers']))
 
 if config['dataset'] in ['KU', 'Food', 'Dance', 'Movie']:
-    df1 = pd.read_csv(f'../data/{config["dataset"]}/train.csv')  # 替换为你的文件路径
-    df2 = pd.read_csv(f'../data/{config["dataset"]}/test.csv')  # 替换为你的文件路径
-    df3 = pd.read_csv(f'../data/{config["dataset"]}/vali.csv')  # 替换为你的文件路径
-    # 统计每一列的不重复元素个数
+    df1 = pd.read_csv(f'../data/{config["dataset"]}/train.csv')  
+    df2 = pd.read_csv(f'../data/{config["dataset"]}/test.csv')  
+    df3 = pd.read_csv(f'../data/{config["dataset"]}/vali.csv')  
     train_counts1 = df1.nunique()
     test_counts2 = df2.nunique()
     vali_counts3 = df3.nunique()
