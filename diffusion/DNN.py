@@ -16,7 +16,7 @@ class LearnableScalar(nn.Module):
 
 class DNN(nn.Module):
     """
-    A deep neural network for the reverse process of latent diffusion.
+    A neural network for the reverse denoising process.
     """
     def __init__(self, in_dims, out_dims, time_emb_size, guidance_emb_size, time_type="cat", norm=False, act_func='tanh', dropout=0.1):
         super(DNN, self).__init__()
@@ -91,7 +91,7 @@ class DNN(nn.Module):
             num_heads=self.num_heads,
             batch_first=True
         )
-        # 门控参数
+
         self.gate = nn.Parameter(torch.tensor(0.1))
         self.att_gate = nn.Parameter(torch.tensor(0.1))
 
