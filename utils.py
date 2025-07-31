@@ -106,7 +106,7 @@ def load_data(data_path, dim):
 
 
 def negative_sampling(train_data, num_negatives):
-    """sample negative instances for training, refer to Heater."""
+    """sample negative instances for training."""
     # warm items in training set.
     item_warm = np.unique(train_data['iid'].values)
     # arrange the training data with form {user_1: [[user_1], [user_1_item], [user_1_rating]],...}.
@@ -135,14 +135,6 @@ def negative_sampling(train_data, num_negatives):
 
 def compute_metrics(evaluate_data, user_item_preds, item_ids_map, recall_k):
     """compute evaluation metrics for cold-start items."""
-    """input:
-    evaluate_data: (uid, iid) dataframe.
-    user_item_preds: cold-start item prediction for each user.
-    item_ids_map: {ori_id: reindex_id} dict.
-    recall_k: top_k metrics.
-       output:
-    recall, precision, ndcg
-    """
     pred = []
     target_rows, target_columns = [], []
     temp = 0
